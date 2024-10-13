@@ -1,25 +1,30 @@
 package flower.store;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class Store {
     private ArrayList<FlowerBucket> inventory;
+
+    public Store() {
+        inventory = new ArrayList<>();
+    }
     
     public void addBucket(FlowerBucket bucket) {
         inventory.add(bucket);
     }
 
-    public String search(FlowerBucket bucket) {
-        for (FlowerBucket flowerBucket : inventory) {
-            if (flowerBucket.getPrice() == bucket.getPrice() && 
-            flowerBucket.getFlowerPacks().equals(bucket.getFlowerPacks())) {
-                return "Bucket found";
+    public String search(FlowerSpec spec) {
+        ArrayList<FlowerBucket> foundBuckets = new ArrayList<>();
+        for (Iterator<FlowerBucket> i = inventory.iterator(); i.hasNext();) {
+            FlowerBucket bucket = (FlowerBucket) i.next();
+            FlowerSpec bucketSpec = bucket.getSpec();
+            if (spec.matches(bucketSpec)) {
+                foundBuckets.add(bucket);
             }
         }
-        return "Bucket not found";
+        if (foundBuckets.isEmpty()) {
+            return "No flowers found";
+        }
+        return foundBuckets.toString();
     }
 }

@@ -15,4 +15,12 @@ public class FlowerPack {
     public double getPrice() {
         return flower.getPrice() * quantity;
     }
+
+    @Override
+    public String toString() {
+        return "FlowerPack{" +
+                "flower=" + flower +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

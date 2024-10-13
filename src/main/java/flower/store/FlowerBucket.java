@@ -25,4 +25,22 @@ public class FlowerBucket {
         }
         return price;
     }
+
+    public FlowerSpec getSpec() {
+        FlowerSpec spec = new FlowerSpec();
+        for (FlowerPack flowerPack : flowerPacks) {
+            spec.setFlowerType(flowerPack.getFlower().getFlowerType());
+            spec.setColor(flowerPack.getFlower().getColor());
+            spec.setPrice(flowerPack.getFlower().getPrice());
+            spec.setSepalLength(flowerPack.getFlower().getSepalLength());
+        }
+        return spec;
+    }
+
+    @Override
+    public String toString() {
+        return "FlowerBucket{" +
+                "flowerPacks=" + flowerPacks +
+                '}';
+    }
 }
